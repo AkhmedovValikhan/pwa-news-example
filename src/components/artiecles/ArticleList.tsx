@@ -1,8 +1,8 @@
 import * as React from "react";
 import { NewsEntry } from "../../model/News";
 import { times } from "../../utils/ArrayUtils";
-import { ArticleListItem } from "./ArticleListItem";
 import { isPromiseLike } from "../../utils/DomUtils";
+import { ArticleListItem } from "./ArticleListItem";
 
 const SKELETON_COUNT = 9;
 
@@ -28,7 +28,7 @@ export class ArticleList extends React.PureComponent<ArticleListProps, ArticleLi
             articles,
             loading: !articles,
             expandedArticle: null,
-        }
+        };
     }
 
     public componentWillMount() {
@@ -39,6 +39,12 @@ export class ArticleList extends React.PureComponent<ArticleListProps, ArticleLi
         if (this.props.articles !== prevProps.articles) {
             this.initializeItems();
         }
+    }
+
+    public render() {
+        return <React.Fragment>
+            {this.renderArticles()}
+        </React.Fragment>;
     }
 
     private async initializeItems() {
@@ -62,10 +68,10 @@ export class ArticleList extends React.PureComponent<ArticleListProps, ArticleLi
     private renderArticles(): JSX.Element[] {
         if (this.state.loading) {
             return times(SKELETON_COUNT).map((_n, ind) => {
-                return <ArticleListItem key={ind} loading />;
-            })
+                return <ArticleListItem key={ind} loading={true} />;
+            });
         }
-        return this.state.articles.map(article => {
+        return this.state.articles.map((article) => {
             return <ArticleListItem
                 expanded={article.url === this.state.expandedArticle}
                 onClick={this.onExpanded}
@@ -73,11 +79,5 @@ export class ArticleList extends React.PureComponent<ArticleListProps, ArticleLi
                 article={article}
             />;
         });
-    }
-
-    render() {
-        return <React.Fragment>
-            {this.renderArticles()}
-        </React.Fragment>;
     }
 }

@@ -5,6 +5,20 @@
         "tslint-react"
     ],
     "jsRules": {},
-    "rules": {},
+    "rules": {
+        "object-literal-sort-keys": false,
+        "max-line-length": false,
+        "jsx-wrap-multiline": false,
+        "jsx-no-lambda": false,
+        "interface-name": false,
+        "jsx-no-multiline-js": false,
+        "no-implicit-dependencies": false,
+        "no-object-literal-type-assertion": false,
+        "variable-name": {
+            "options": [
+                "allow-leading-underscore"
+            ]
+        }
+    },
     "rulesDirectory": []
 }

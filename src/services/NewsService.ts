@@ -1,7 +1,7 @@
-import { stringify } from 'querystring';
-import { NewsApiQuery, ArticlesEndpointResult, SourcesResult } from '../model/News';
+import { stringify } from "querystring";
+import { ArticlesEndpointResult, NewsApiQuery, SourcesResult } from "../model/News";
 
-const HARDCODED_COUNTRY = 'gb';
+const HARDCODED_COUNTRY = "gb";
 
 export class NewsService {
 
@@ -14,8 +14,8 @@ export class NewsService {
     public async getArticles(sources: string[]) {
         const query: NewsApiQuery = {
             apiKey: this._apiKey,
-            sources: sources.join(','),
-        }
+            sources: sources.join(","),
+        };
         const result = await fetch(`${this._apiUrl}/everything?${stringify(query)}`, {});
         const parsedRes: ArticlesEndpointResult = await result.json();
         return parsedRes.articles;

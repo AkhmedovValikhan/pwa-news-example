@@ -8,7 +8,6 @@
 // }
 
 // export class DataService {
-    
 
 //     public get(url: string, option) {
 

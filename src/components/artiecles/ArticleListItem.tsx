@@ -1,11 +1,11 @@
+import classNames from "classnames";
+import { format } from "date-fns";
 import * as React from "react";
-import { NewsEntry } from "../../model/News";
-import './ArticleListItem.scss';
-import classNames from 'classnames';
-import { format } from 'date-fns';
-import { Button } from "../common/Button";
 import { CSSTransition } from "react-transition-group";
+import { NewsEntry } from "../../model/News";
 import { getWindow } from "../../utils/DomUtils";
+import { Button } from "../common/Button";
+import "./ArticleListItem.scss";
 export interface ArticleListItemProps {
     loading?: boolean;
     onClick: (article: NewsEntry) => void;
@@ -14,37 +14,47 @@ export interface ArticleListItemProps {
 }
 
 export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
-    static defaultProps: Partial<ArticleListItemProps> = {
+    public static defaultProps: Partial<ArticleListItemProps> = {
         loading: false,
         expanded: false,
+    };
+
+    public render() {
+        const classes = classNames({
+            "article-card": true,
+            "article-card--expanded": this.props.expanded,
+        });
+        return (
+            <div className={classes} onClick={this.onClick}>
+                {this.props.loading ? this.renderSkeleton() : this.renderCardContent()}
+            </div>
+        );
     }
 
     private openLink = () => {
-        getWindow().open(this.props.article.url, '__blank');
+        getWindow().open(this.props.article.url, "__blank");
     }
 
     private renderCardHeader(article: NewsEntry) {
         const { urlToImage } = article;
         const styles: React.CSSProperties = {
-            backgroundImage: urlToImage ? `url(${urlToImage}` : '',
-        }
-        return <div className="article-card__header" style={styles}>
-        </div>;
+            backgroundImage: urlToImage ? `url(${urlToImage}` : "",
+        };
+        return  <div className="article-card__header" style={styles}/>;
     }
 
-
     private renderExpandedContent(article: NewsEntry): JSX.Element {
-        const author = (!article.author || article.author.startsWith('http')) ? null : article.author;
+        const author = (!article.author || article.author.startsWith("http")) ? null : article.author;
 
-        return <CSSTransition mountOnEnter unmountOnExit in={this.props.expanded} timeout={300}>
+        return <CSSTransition mountOnEnter={true} unmountOnExit={true} in={this.props.expanded} timeout={300}>
             <div className="article-card__extended-content">
                 <p className="article-card__description">{this.props.article.description}</p>
                 <div className="article-card__extended-content-footer">
                     <p className="article-card__authort">{author}</p>
-                    <Button theme='primary' onClick={this.openLink}>Read Article</Button>
+                    <Button theme="primary" onClick={this.openLink}>Read Article</Button>
                 </div>
             </div>
-        </CSSTransition>
+        </CSSTransition>;
     }
 
     private renderCardContent() {
@@ -53,10 +63,10 @@ export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
         return <React.Fragment>
             {this.renderCardHeader(article)}
             <div className="article-card__body">
-                <div className='article-card__body-header'>
+                <div className="article-card__body-header">
                     <h4 className="article-card__title">{article.title}</h4>
-                    <div className='article-card__footer'>
-                        {date && <p className='article-card__date'>{date}</p>}
+                    <div className="article-card__footer">
+                        {date && <p className="article-card__date">{date}</p>}
                         <p className="article-card__source">{article.source.name}</p>
                     </div>
                 </div>
@@ -67,27 +77,12 @@ export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
 
     private renderSkeleton() {
         return <React.Fragment>
-            <div className="article-card__header-skeleton"></div>
+            <div className="article-card__header-skeleton"/>
             <div className="article-card__body">
-                <div className="article-card__body-skeleton">
-                </div>
+                <div className="article-card__body-skeleton"/>
             </div>
-        </React.Fragment>
+        </React.Fragment>;
     }
 
     private onClick = () => this.props.onClick && this.props.onClick(this.props.article);
-
-
-    render() {
-        const classes = classNames({
-            'article-card': true,
-            'article-card--expanded': this.props.expanded,
-        });
-        return (
-            <div className={classes} onClick={this.onClick}>
-                {this.props.loading ? this.renderSkeleton() : this.renderCardContent()}
-            </div>
-        );
-    }
 }
-

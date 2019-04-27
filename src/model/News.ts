@@ -1,5 +1,5 @@
 
-export type ResultStatus = 'ok' | 'error';
+export type ResultStatus = "ok" | "error";
 
 interface EndpointResult {
     status: ResultStatus;
@@ -37,7 +37,6 @@ export interface Source {
     language: string;
     country: string;
 }
-
 
 export interface NewsApiQuery {
     apiKey: string;

@@ -9,7 +9,8 @@
     "start": "webpack-dev-server --open",
     "build": "cross-env NODE_ENV=production webpack --env.production",
     "build:dev": "cross-env NODE_ENV=develpom webpack",
-    "tslint": "tslint --project tsconfig.json"
+    "tslint": "tslint --project tsconfig.json",
+    "tslint:fix": "tslint --project tsconfig.json --fix"
   },
   "author": "",
   "license": "ISC",
