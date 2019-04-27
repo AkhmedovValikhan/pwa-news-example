@@ -1,5 +1,7 @@
 
 ## Notes
+Application preview can be accessed using this [Link](https://news-app-pwa.azurewebsites.net/)
+
 Design idea taken from [Dribble](https://dribbble.com/shots/6140371-Dashboard-for-schedule-and-monitoring-platform-version-4/attachments/1316926).
 
 App is guaranteed to be working only on Chrome browser as no polyfills/post-css prefixes were not shipped for sake of simplicity. Paging, country selection are not implemented. Categories are extracted from sources.
