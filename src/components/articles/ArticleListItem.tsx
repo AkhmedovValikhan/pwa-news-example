@@ -4,9 +4,9 @@ import * as React from "react";
 import { CSSTransition } from "react-transition-group";
 import { Article } from "../../model/News";
 import { getWindow } from "../../utils/DomUtils";
+import { getArticleAuthor } from "../../utils/NewsUtils";
 import { Button } from "../common/Button";
 import "./ArticleListItem.scss";
-import { getArticleAuthor } from "../../utils/NewsUtils";
 export interface ArticleListItemProps {
     loading?: boolean;
     onClick: (article: Article) => void;
@@ -65,11 +65,11 @@ export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
             {this.renderCardHeader(article)}
             <div className="article-card__body">
                 <div className="article-card__body-header">
-                    <h4 className="article-card__title">{article.title}</h4>
-                    <div className="article-card__footer">
+                    <div className="article-card__meta-info">
                         {date && <p className="article-card__date">{date}</p>}
                         <p className="article-card__source">{article.source.name}</p>
                     </div>
+                    <h4 className="article-card__title">{article.title}</h4>
                 </div>
                 {this.renderExpandedContent(article)}
             </div>
