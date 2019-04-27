@@ -6,16 +6,10 @@
     display: flex;
     align-items: center;
     transition: all .3s ease-in-out;
-    transition-delay: .3s;
 
     &__container {
         display: flex;
         align-items: center;
-    }
-
-    &--category {
-        transition-delay: 0s;
-        // background: $color-primary-bg;
     }
 
     &__title {

@@ -1,30 +1,25 @@
 import * as React from 'react';
 import './Header.scss';
 import { CSSTransition } from 'react-transition-group';
-import { withRouter, RouteComponentProps } from 'react-router';
 import { Button } from './Button';
 import classNames from 'classnames';
 
-export interface HeaderProps extends RouteComponentProps {
+export interface HeaderProps {
     title: string;
-    isCategory: boolean;
+    onBack?: () => void;
 }
 
-class HeaderComponent extends React.PureComponent<HeaderProps> {
-    private onBackClick = () => {
-        this.props.history.push('/');
-    }
-
+export class Header extends React.PureComponent<HeaderProps> {
     private renderBackLink() {
-        return <CSSTransition unmountOnExit in={this.props.isCategory} timeout={350}>
-            <Button theme='secondary' className='header__button' onClick={this.onBackClick}>Back</Button>
+        return <CSSTransition unmountOnExit in={!!this.props.onBack} timeout={350}>
+            <Button theme='secondary' className='header__button' onClick={this.props.onBack}>Back</Button>
         </CSSTransition>
     }
 
     public render() {
         const className = classNames({
             'header': true,
-            'header--category': this.props.isCategory
+            'header--with-back': this.props.onBack
         })
         return <header className={className}>
             <div className="container header__container">
@@ -34,6 +29,3 @@ class HeaderComponent extends React.PureComponent<HeaderProps> {
         </header>
     }
 }
-
-const Header = withRouter(HeaderComponent);
-export { Header }

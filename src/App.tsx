@@ -2,22 +2,27 @@ import * as React from 'react';
 import './App.scss';
 import { HomePage } from './components/home/HomePage';
 import { Header } from './components/common/Header';
-import { BrowserRouter, Route, RouteComponentProps } from 'react-router-dom';
-
+import { Route, RouteComponentProps, Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 interface NewsMatch {
   category: string;
 }
 
 class App extends React.Component {
+  private _history = createBrowserHistory({});
+
+  private redirectToMain = () => {
+    this._history.push('/');
+  }
 
   private renderHeader(cateogry: string) {
     const title = cateogry ? cateogry : 'News Application';
-    return <Header isCategory={!!cateogry} title={title} />;
+    return <Header onBack={cateogry ? this.redirectToMain : undefined} title={title} />;
   }
 
   render() {
     return (
-      <BrowserRouter>
+      <Router history={this._history}>
         <Route path='/:category?' render={((props: RouteComponentProps<NewsMatch>) => {
           const { category } = props.match.params;
           return <React.Fragment>
@@ -28,7 +33,7 @@ class App extends React.Component {
           </React.Fragment>
         })}>
         </Route>
-      </BrowserRouter >
+      </Router >
     );
   }
 }
