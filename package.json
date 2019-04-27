@@ -8,7 +8,8 @@
     "test:w": "jest --watchAll",
     "start": "webpack-dev-server --open",
     "build": "cross-env NODE_ENV=production webpack --env.production",
-    "build:dev": "cross-env NODE_ENV=develpom webpack"
+    "build:dev": "cross-env NODE_ENV=develpom webpack",
+    "tslint": "tslint --project tsconfig.json"
   },
   "author": "",
   "license": "ISC",
@@ -45,6 +46,8 @@
     "terser-webpack-plugin": "^1.2.3",
     "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
+    "tslint": "^5.16.0",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.4.4",
     "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^3.3.2",
