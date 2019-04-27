@@ -89,7 +89,7 @@ export class HomePage extends React.PureComponent<HomeProps, HomeState> {
                 {this.renderCategories()}
                 <div className="module">
                     <h3>{title}</h3>
-                    <div className="headlines__container">
+                    <div className="articles__container">
                         <ArticleList articles={this.state.articles} />
                     </div>
                 </div>

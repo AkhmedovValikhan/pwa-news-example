@@ -4,7 +4,6 @@ const path = require('path');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
@@ -86,12 +85,7 @@ module.exports = function (env) {
                 filename: 'styles.css'
             }) : undefined,
             ...htmlPlugins(isEnvProduction),
-
             // new BundleAnalyzerPlugin(),
-            // new WorkboxPlugin.GenerateSW({
-            //     clientsClaim: true,
-            //     skipWaiting: true
-            // }),
             new ServiceWorkerWebpackPlugin({
                 entry: path.join(__dirname, 'src/service-worker.js'),
             }),
