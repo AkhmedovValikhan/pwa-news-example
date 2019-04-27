@@ -4,7 +4,7 @@ import { hydrate, render } from "react-dom";
 import App from "./App";
 import { NewsService } from "./services/NewsService";
 
-if (!PRERENDER) {
+if (!window.PRERENDER) {
     (() => {
         initializeInjector();
         const appRoot = document.getElementById("root");
@@ -17,7 +17,7 @@ if (!PRERENDER) {
     })();
 }
 
-export default function() {
+export default function () {
     injector.bind(NewsService).toInstance({
         getArticles: () => Promise.resolve([]),
         getHeadlines: () => Promise.resolve([]),

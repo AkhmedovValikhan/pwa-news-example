@@ -23,7 +23,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "jsx": "react",
-        "isolatedModules": true
+        "isolatedModules": false
     },
     "include": [
         "src/**/*.ts",

@@ -3,6 +3,9 @@
 /// <reference types="react-dom" />
 
 declare var PRERENDER;
+declare interface Window {
+  PRERENDER: boolean;
+}
 
 declare namespace NodeJS {
     interface ProcessEnv {

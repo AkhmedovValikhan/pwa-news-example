@@ -18,13 +18,15 @@ const PATH = {
     appHtml: path.resolve("./public/index.html"),
 };
 
-const defines = new webpack.DefinePlugin({
-    PRERENDER: JSON.stringify(!1),
-});
 
-module.exports = function(env) {
+module.exports = function (env) {
     const isEnvProduction = env && env.production;
     const isEnvDevelopment = !isEnvProduction;
+
+    const defines = new webpack.DefinePlugin({
+        PRERENDER: JSON.stringify(false),
+    });
+
 
     return {
         mode: isEnvProduction ? "production" : "development",
@@ -66,6 +68,14 @@ module.exports = function(env) {
                         "file-loader",
                     ],
                 },
+                {
+                    test: /index\.html$/,
+                    loader: 'prerender-loader',
+                    options: {
+                        string: true,
+                        disabled: !isEnvProduction
+                    }
+                }
             ],
         },
         devServer: {
@@ -77,7 +87,7 @@ module.exports = function(env) {
             extensions: [".tsx", ".ts", ".js"],
         },
         plugins: [
-            !isEnvProduction && defines,
+            // defines,
             new CleanWebpackPlugin(),
             isEnvProduction ? new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
@@ -108,7 +118,7 @@ const htmlPlugins = (isEnvProduction) => {
             {},
             {
                 inject: true,
-                template: isEnvProduction ? "!!prerender-loader?string!./src/index.html" : "./src/index.html",
+                template: "./src/index.html",
             },
             isEnvProduction
                 ? {
