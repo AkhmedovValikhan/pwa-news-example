@@ -1,0 +1,54 @@
+@import '../../styles/variables.scss';
+
+.header {
+    padding: 30px 0;
+    background: white;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease-in-out;
+    transition-delay: .3s;
+
+    &__container {
+        display: flex;
+        align-items: center;
+    }
+
+    &--category {
+        transition-delay: 0s;
+        // background: $color-primary-bg;
+    }
+
+    &__title {
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        font-weight: 600;
+        margin: 10px 0;
+    }
+
+    &__button {
+        margin-right: 10px;
+
+        &.enter {
+            opacity: 0;
+            max-height: 0;
+        }
+
+        &.enter-active {
+            transition: all .3s;
+            max-height: 600px;
+            opacity: 1;
+
+        }
+
+        &.exit {
+            opacity: 1;
+            max-height: 600px;
+        }
+
+        &.exit-active {
+            max-height: 0;
+            opacity: 0;
+            transition: all .3s;
+        }
+    }
+}

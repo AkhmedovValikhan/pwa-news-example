@@ -1,0 +1,13 @@
+@import './mixins/layout';
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    @include make-container-max-widths();
+}
+
+.module {
+    // margin-top: 20px;
+}

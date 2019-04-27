@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+$btn-class: '.button';
+
+@mixin button-theme($theme-name, $bg-col, $bg-col-hover, $ftn-col) {
+    #{$btn-class}#{&}--#{$theme-name} {
+        background: $bg-col;
+        color: $ftn-col;
+
+        &:hover {
+            background: $bg-col-hover;
+        }
+    }
+}
+
+#{$btn-class} {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 0 15px;
+    color: white;
+    transition: all .15s linear;
+    min-width: 100px;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+@include button-theme('primary', $color-primary-bg, $color-primary-bg-hover, $color-primary);
+@include button-theme('secondary', $color-secondary-bg, $color-secondary-bg-hover, $color-secondary);
+// @include button-theme('secondary-hollow', white, $color-secondary-extra-light, $color-secondary);
+// @include button-theme('default', white, $color-primary-light, $color-primary);

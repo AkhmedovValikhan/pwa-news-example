@@ -1,0 +1,169 @@
+@import '../../styles/variables.scss';
+$card-class: '.article-card';
+$card-height: 300px;
+$card-border-radius: 15px;
+$transition-duration: .3s;
+
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: 200% 0
+    }
+
+    100% {
+        background-position: 0 0
+    }
+}
+
+%loading-base {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #F6F6F6;
+    background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+    background-size: 400% 100%;
+}
+
+
+@mixin card-expanded {
+    #{$card-class}--expanded & {
+        @content;
+    }
+}
+
+#{$card-class} {
+    $card: &;
+    width: calc(33% - 10px);
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    overflow: hidden;
+    border-radius: $card-border-radius;
+    background: white;
+    box-shadow: 0px 0px 10px 1px #0000001f;
+    text-decoration: none;
+    color: $color-font;
+    display: inline-block;
+    height: $card-height;
+    transition: all $transition-duration linear;
+    position: relative;
+    cursor: pointer;
+    padding-bottom: 70px;
+
+    &:hover {
+        box-shadow: 0px 0px 8px 5px #0000001f;
+    }
+
+    &__header {
+        display: flex;
+        align-items: flex-end;
+        background-size: cover;
+        background-repeat: no-repeat;
+        flex-grow: 1;
+        transition: all $transition-duration linear;
+        height: 100%;
+
+        @include card-expanded() {
+            opacity: 0;
+        }
+
+        &-skeleton {
+            height: 250px;
+            @extend %loading-base;
+        }
+    }
+
+
+
+    &__footer {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__date {
+        font-weight: 600;
+        margin-top: 10px;
+        color: #808080ab;
+    }
+
+    &__source {
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    &__body {
+        transition: all $transition-duration ease-in-out;
+
+        @include card-expanded() {
+            max-height: $card-height;
+        }
+
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        max-height: 110px;
+        padding: 20px;
+        position: absolute;
+        border-radius: 15px;
+        background: white;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        &-skeleton {
+            @extend %loading-base;
+            height: 2rem;
+        }
+    }
+
+    &__body-header {
+        display: flex;
+        flex-flow: column;
+        overflow: hidden;
+        flex: 1;
+
+        @include card-expanded() {
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: auto;
+        }
+    }
+
+    &__title {
+        flex-grow: 0;
+        flex-shrink: 1;
+        margin: 0;
+    }
+
+    &__extended-content {
+        flex: 1;
+        display: flex;
+        flex-flow: column;
+        opacity: 0;
+        transition: all $transition-duration linear;
+
+        @include card-expanded() {
+            margin-top: 20px;
+            opacity: 1;
+        }
+
+        &.enter {
+            opacity: 0;
+        }
+    }
+
+    &__description {
+        flex: 1;
+    }
+
+    &__extended-content-footer {
+        flex-grow: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__author {}
+}

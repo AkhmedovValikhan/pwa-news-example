@@ -1,0 +1,17 @@
+@import './variables.scss';
+@import './typography.scss';
+@import './layout.scss';
+
+html {
+    font-size: 14px;
+    color: $color-font;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: $color-background;
+}
+
+* {
+    box-sizing: border-box;
+}
