@@ -7,7 +7,7 @@ jest.mock("react-transition-group", () => {
 });
 
 import { MOCK_NEWS } from "../../__fixtures__/newsItems";
-import { NewsEntry } from "../../model/News";
+import { Article } from "../../model/News";
 import { tickMarcroTask } from "../../utils/DomUtils";
 import { ArticleList } from "./ArticleList";
 import { ArticleListItem } from "./ArticleListItem";
@@ -26,8 +26,8 @@ describe("ArticleList", () => {
     });
 
     it("renders pending articles", async () => {
-        let resolve: (result: NewsEntry[]) => void;
-        const mockAritclesPromise = new Promise<NewsEntry[]>((res) => resolve = res);
+        let resolve: (result: Article[]) => void;
+        const mockAritclesPromise = new Promise<Article[]>((res) => resolve = res);
         const wrapper = shallow(<ArticleList articles={mockAritclesPromise} />);
 
         let articles = wrapper.find(ArticleListItem);

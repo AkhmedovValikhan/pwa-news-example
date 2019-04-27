@@ -2,10 +2,10 @@ import { inject } from "propin";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { CSSTransition } from "react-transition-group";
-import { NewsEntry, Source } from "../../model/News";
+import { Article, Source } from "../../model/News";
 import { NewsService } from "../../services/NewsService";
 import { extractCategories, sourcesOfCategory } from "../../utils/NewsUtils";
-import { ArticleList } from "../artiecles/ArticleList";
+import { ArticleList } from "../articles/ArticleList";
 import { Button } from "../common/Button";
 import "./HomePage.scss";
 
@@ -14,7 +14,7 @@ export type HomeProps = Pick<RouteComponentProps, "history"> & {
 };
 
 export interface HomeState {
-    articles?: Promise<NewsEntry[]>;
+    articles?: Promise<Article[]>;
     sources: Source[];
 }
 
@@ -62,7 +62,7 @@ export class HomePage extends React.PureComponent<HomeProps, HomeState> {
     }
 
     private async fetchArticles() {
-        let articles: Promise<NewsEntry[]>;
+        let articles: Promise<Article[]>;
         if (this.props.selectedCategory) {
             const sources = sourcesOfCategory(this.state.sources, this.props.selectedCategory);
             articles = this._newsService.getArticles(sources.map((s) => s.id));

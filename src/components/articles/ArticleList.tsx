@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NewsEntry } from "../../model/News";
+import { Article } from "../../model/News";
 import { times } from "../../utils/ArrayUtils";
 import { isPromiseLike } from "../../utils/DomUtils";
 import { ArticleListItem } from "./ArticleListItem";
@@ -7,11 +7,11 @@ import { ArticleListItem } from "./ArticleListItem";
 const SKELETON_COUNT = 9;
 
 export interface ArticleListProps {
-    articles?: NewsEntry[] | Promise<NewsEntry[]>;
+    articles?: Article[] | Promise<Article[]>;
 }
 
 interface ArticleListState {
-    articles: NewsEntry[];
+    articles: Article[];
     loading: boolean;
     expandedArticle: string | null;
 }
@@ -19,7 +19,7 @@ interface ArticleListState {
 export class ArticleList extends React.PureComponent<ArticleListProps, ArticleListState> {
     constructor(props: ArticleListProps) {
         super(props);
-        let articles: NewsEntry[] = [];
+        let articles: Article[] = [];
         if (this.props.articles && !isPromiseLike(this.props.articles)) {
             articles = this.props.articles;
         }
@@ -60,7 +60,7 @@ export class ArticleList extends React.PureComponent<ArticleListProps, ArticleLi
         }
     }
 
-    private onExpanded = (article: NewsEntry) => {
+    private onExpanded = (article: Article) => {
         const expandedArticle = article.url === this.state.expandedArticle ? null : article.url;
         this.setState({ expandedArticle });
     }

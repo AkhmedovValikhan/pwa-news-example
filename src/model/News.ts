@@ -8,18 +8,18 @@ export interface SourcesResult extends EndpointResult {
     sources: Source[];
 }
 export interface ArticlesEndpointResult extends EndpointResult {
-    articles: NewsEntry[];
+    articles: Article[];
     totalResults: number;
 }
 
-export interface NewsEntry {
+export interface Article {
     source: ArticleSource;
     author: string | null;
     title: string;
     description: string;
     url: string;
-    urlToImage: string  | null;
-    publishedAt: string  | null;
+    urlToImage: string | null;
+    publishedAt: string | null;
     content: string | null;
 }
 
@@ -40,7 +40,7 @@ export interface Source {
 
 export interface NewsApiQuery {
     apiKey: string;
-    sortBy?: keyof NewsEntry;
+    sortBy?: keyof Article;
     from?: string;
     q?: string;
     country?: string;

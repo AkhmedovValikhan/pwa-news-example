@@ -1,4 +1,4 @@
-import { Source } from "../model/News";
+import { Source, Article } from "../model/News";
 
 export const extractCategories = (sources: Source[]) => {
     const categories = sources.map((s) => s.category);
@@ -8,4 +8,8 @@ export const extractCategories = (sources: Source[]) => {
 
 export const sourcesOfCategory = (sources: Source[], category: string) => {
     return sources.filter((s) => s.category === category);
+};
+
+export const getArticleAuthor = (article: Article) => {
+    return (!article.author || article.author.startsWith("http")) ? null : article.author;
 };

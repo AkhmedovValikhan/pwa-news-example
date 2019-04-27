@@ -1,6 +1,6 @@
-import { NewsEntry, Source } from "../model/News";
+import { Article, Source } from "../model/News";
 
-export const MOCK_NEWS: NewsEntry[] = [
+export const MOCK_NEWS: Article[] = [
     {
         source: {
             id: null,

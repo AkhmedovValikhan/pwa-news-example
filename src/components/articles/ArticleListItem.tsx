@@ -2,14 +2,15 @@ import classNames from "classnames";
 import { format } from "date-fns";
 import * as React from "react";
 import { CSSTransition } from "react-transition-group";
-import { NewsEntry } from "../../model/News";
+import { Article } from "../../model/News";
 import { getWindow } from "../../utils/DomUtils";
 import { Button } from "../common/Button";
 import "./ArticleListItem.scss";
+import { getArticleAuthor } from "../../utils/NewsUtils";
 export interface ArticleListItemProps {
     loading?: boolean;
-    onClick: (article: NewsEntry) => void;
-    article: NewsEntry;
+    onClick: (article: Article) => void;
+    article: Article;
     expanded?: boolean;
 }
 
@@ -35,16 +36,16 @@ export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
         getWindow().open(this.props.article.url, "__blank");
     }
 
-    private renderCardHeader(article: NewsEntry) {
+    private renderCardHeader(article: Article) {
         const { urlToImage } = article;
         const styles: React.CSSProperties = {
             backgroundImage: urlToImage ? `url(${urlToImage}` : "",
         };
-        return  <div className="article-card__header" style={styles}/>;
+        return <div className="article-card__header" style={styles} />;
     }
 
-    private renderExpandedContent(article: NewsEntry): JSX.Element {
-        const author = (!article.author || article.author.startsWith("http")) ? null : article.author;
+    private renderExpandedContent(article: Article): JSX.Element {
+        const author = getArticleAuthor(article);
 
         return <CSSTransition mountOnEnter={true} unmountOnExit={true} in={this.props.expanded} timeout={300}>
             <div className="article-card__extended-content">
@@ -77,9 +78,9 @@ export class ArticleListItem extends React.PureComponent<ArticleListItemProps> {
 
     private renderSkeleton() {
         return <React.Fragment>
-            <div className="article-card__header-skeleton"/>
+            <div className="article-card__header-skeleton" />
             <div className="article-card__body">
-                <div className="article-card__body-skeleton"/>
+                <div className="article-card__body-skeleton" />
             </div>
         </React.Fragment>;
     }
