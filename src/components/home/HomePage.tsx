@@ -1,7 +1,7 @@
-import { inject } from "propin";
 import * as React from "react";
 import { RouteComponentProps } from "react-router";
 import { CSSTransition } from "react-transition-group";
+import { Inject } from "../../injector/injector";
 import { Article, Source } from "../../model/News";
 import { NewsService } from "../../services/NewsService";
 import { extractCategories, sourcesOfCategory } from "../../utils/NewsUtils";
@@ -19,7 +19,7 @@ export interface HomeState {
 }
 
 export class HomePage extends React.PureComponent<HomeProps, HomeState> {
-    @inject() private _newsService: NewsService;
+    @Inject() private _newsService: NewsService;
 
     constructor(props: HomeProps) {
         super(props);

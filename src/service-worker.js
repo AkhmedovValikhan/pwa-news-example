@@ -13,7 +13,7 @@ var contentToCache = appShellFiles;
 
 // Installing Service Worker
 self.addEventListener("install", function(e) {
-    console.log("[Service Worker] Install");
+    console.log("[Service Worker] Installing");
     e.waitUntil(
         caches.open(shellCacheName).then(function(cache) {
             console.log("[Service Worker] Caching all: app shell and content");
@@ -21,6 +21,11 @@ self.addEventListener("install", function(e) {
         }),
     );
     console.log("[Service Worker] Installed");
+});
+
+self.addEventListener('active', function (_e) {
+    // Service worker is now active, we can do some clenup of previous version resources here.
+    cconsole.log("[Service Worker] Active");
 });
 
 // Fetching content using Service Worker
@@ -39,4 +44,4 @@ self.addEventListener("fetch", function(e) {
         }),
     );
 });
-
+

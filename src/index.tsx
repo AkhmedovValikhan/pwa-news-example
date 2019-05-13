@@ -5,16 +5,14 @@ import App from "./App";
 import { NewsService } from "./services/NewsService";
 
 if (!window.PRERENDER) {
-    (() => {
-        initializeInjector();
-        const appRoot = document.getElementById("root");
-        if (appRoot!.children.length) {
-            hydrate(<App />, appRoot);
-        } else {
-            render(<App />, appRoot);
-        }
-        initializeServiceWorker();
-    })();
+    initializeInjector();
+    const appRoot = document.getElementById("root");
+    if (appRoot!.children.length) {
+        hydrate(<App />, appRoot);
+    } else {
+        render(<App />, appRoot);
+    }
+    initializeServiceWorker();
 }
 
 export default function () {

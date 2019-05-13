@@ -23,11 +23,6 @@ module.exports = function (env) {
     const isEnvProduction = env && env.production;
     const isEnvDevelopment = !isEnvProduction;
 
-    const defines = new webpack.DefinePlugin({
-        PRERENDER: JSON.stringify(false),
-    });
-
-
     return {
         mode: isEnvProduction ? "production" : "development",
         entry: {
