@@ -1,4 +1,4 @@
-import { Source, Article } from "../model/News";
+import { Article, Source } from "../model/News";
 
 export const extractCategories = (sources: Source[]) => {
     const categories = sources.map((s) => s.category);

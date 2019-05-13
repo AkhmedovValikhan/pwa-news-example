@@ -15,7 +15,7 @@ if (!window.PRERENDER) {
     initializeServiceWorker();
 }
 
-export default function () {
+export default function() {
     injector.bind(NewsService).toInstance({
         getArticles: () => Promise.resolve([]),
         getHeadlines: () => Promise.resolve([]),

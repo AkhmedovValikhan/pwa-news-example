@@ -35,6 +35,12 @@ $transition-duration: .3s;
     }
 }
 
+@mixin card-hovered {
+    #{$card-class}:hover & {
+        @content;
+    }
+}
+
 #{$card-class} {
     $card: &;
     width: calc(33% - 10px);
@@ -57,6 +63,7 @@ $transition-duration: .3s;
     @include media-breakpoint-down(lg) {
         width: calc(50% - 10px);
     }
+
     @include media-breakpoint-down(sm) {
         width: 100%;
     }
@@ -86,37 +93,36 @@ $transition-duration: .3s;
 
 
 
-    &__footer {
+    &__meta-info {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 10px;
     }
 
     &__date {
         font-weight: 600;
-        margin-top: 10px;
         color: #808080ab;
     }
 
     &__source {
         font-weight: 600;
-        margin-top: 10px;
     }
 
     &__body {
-        transition: all $transition-duration ease-in-out;
+        transition: all $transition-duration cubic-bezier(0.21, 0.07, 0.29, 1);
 
         @include card-expanded() {
-            max-height: $card-height;
+            transform: translateY(0);
         }
 
+        transform: translateY(190px);
         display: flex;
         flex-flow: column;
-        height: 100%;
-        max-height: 110px;
         padding: 20px;
         position: absolute;
         border-radius: 15px;
         background: white;
+        top:0;
         bottom: 0;
         left: 0;
         right: 0;
@@ -131,7 +137,8 @@ $transition-duration: .3s;
         display: flex;
         flex-flow: column;
         overflow: hidden;
-        flex: 1;
+        flex-grow: 0;
+        flex-shrink: 0;
 
         @include card-expanded() {
             flex-grow: 0;

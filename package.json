@@ -7,10 +7,11 @@
     "test": "jest",
     "test:w": "jest --watchAll",
     "start": "webpack-dev-server --open",
-    "build": "cross-env NODE_ENV=production webpack --env.production",
+    "build": "npm i && cross-env NODE_ENV=production webpack --env.production",
     "build:dev": "cross-env NODE_ENV=develpom webpack",
     "tslint": "tslint --project tsconfig.json",
-    "tslint:fix": "tslint --project tsconfig.json --fix"
+    "tslint:fix": "tslint --project tsconfig.json --fix",
+    "ci": "npm run tslint && npm run build && npm run test"
   },
   "author": "",
   "license": "ISC",
